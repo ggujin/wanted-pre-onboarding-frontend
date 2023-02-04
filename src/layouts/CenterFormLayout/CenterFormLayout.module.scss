@@ -1,0 +1,15 @@
+.wrapper {
+  background-color: #efefef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.card {
+  width: 400px;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 1px 1px 1px #ccc;
+  padding: 20px;
+}

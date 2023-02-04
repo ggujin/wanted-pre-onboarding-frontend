@@ -5,6 +5,7 @@ import { FcTodoList } from "react-icons/fc";
 import { Input } from "~/components/Input";
 import { useInput } from "~/Hooks/useInput";
 import { httpClient } from "~/libs/httpClient";
+import { CenterFormLayout } from "~/layouts/CenterFormLayout";
 
 import styles from "./Signup.module.scss";
 
@@ -41,8 +42,8 @@ export function Signup() {
   };
 
   return (
-    <div className={styles.wrapper}>
-      <form className={styles.form} onSubmit={handleSubmit}>
+    <CenterFormLayout>
+      <form onSubmit={handleSubmit}>
         <h2 className={styles.formHeader}>
           <FcTodoList className={styles.icon} />
           회원가입
@@ -78,6 +79,6 @@ export function Signup() {
           </button>
         </div>
       </form>
-    </div>
+    </CenterFormLayout>
   );
 }
