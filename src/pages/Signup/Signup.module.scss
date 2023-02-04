@@ -8,16 +8,39 @@
 
 .form {
   width: 400px;
-  border-radius: 5px; // 깎고 3pxdmf
-  height: 280px;
+  border-radius: 5px;
+  // height: 280px;
   background-color: white;
   box-shadow: 1px 1px 1px #ccc;
+  padding: 20px;
 }
 
 .formHeader {
   text-align: center;
+  margin-top: 0;
 }
 
 .icon {
   vertical-align: top;
+}
+
+.formItem + .formItem {
+  margin-top: 10px;
+}
+
+.input {
+  width: 100%;
+  border: 1px solid #eee;
+  padding: 10px;
+  outline: none;
+  color: #4b4b4b;
+}
+
+.submit {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background: #2f3c7e;
+  color: white;
+  font-weight: bold;
 }
