@@ -14,7 +14,7 @@ export function useInput({ validate }: UseInputParams) {
   useEffect(() => {
     if (!validate) return;
     setIsValid(validate(value));
-  }, [value]);
+  }, [value, validate]);
 
   return { isValid, value, onChange: handleChange };
 }
