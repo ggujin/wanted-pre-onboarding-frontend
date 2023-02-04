@@ -2,9 +2,9 @@ import { FormEvent } from "react";
 import { useNavigate } from "react-router";
 import { FcTodoList } from "react-icons/fc";
 
-import { Input } from "../../components/Input";
-import { useInput } from "../../Hooks/useInput";
-import { httpClient } from "../../libs/httpClient";
+import { Input } from "~/components/Input";
+import { useInput } from "~/Hooks/useInput";
+import { httpClient } from "~/libs/httpClient";
 
 import styles from "./Signup.module.scss";
 
