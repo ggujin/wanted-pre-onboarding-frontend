@@ -1,9 +1,26 @@
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, useEffect } from "react";
 import { FcTodoList } from "react-icons/fc";
-import styles from "./Signup.module.scss";
+
 import { Input } from "../../components/Input";
+import { useInput } from "../../Hooks/useInput";
+
+import styles from "./Signup.module.scss";
 
 export function Signup() {
+  const {
+    value: email,
+    onChange: handleEmailChange,
+    isValid: isEmailValid,
+  } = useInput({ validate: (email) => email.includes("@") });
+
+  const {
+    value: password,
+    onChange: handlePasswordChange,
+    isValid: isPasswordValid,
+  } = useInput({ validate: (password) => password.length > 8 });
+
+  const isSubmitDisabled = !(isEmailValid && isPasswordValid);
+
   return (
     <div className={styles.wrapper}>
       <form className={styles.form}>
@@ -15,6 +32,8 @@ export function Signup() {
           <Input
             type="text"
             name="email"
+            value={email}
+            onChange={handleEmailChange}
             placeholder="이메일을 입력해주세요"
             data-testid="email-input"
           />
@@ -23,6 +42,8 @@ export function Signup() {
           <Input
             type="password"
             name="password"
+            value={password}
+            onChange={handlePasswordChange}
             placeholder="비밀번호를 입력해주세요"
             data-testid="password-input"
           />
@@ -32,6 +53,7 @@ export function Signup() {
             className={styles.submit}
             type="submit"
             data-testid="signup-button"
+            disabled={isSubmitDisabled}
           >
             가입하기
           </button>

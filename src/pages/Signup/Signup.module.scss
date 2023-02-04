@@ -43,4 +43,8 @@
   background: #2f3c7e;
   color: white;
   font-weight: bold;
+
+  &:disabled {
+    background-color: lighten(#2f3c7e, 30%);
+  }
 }
