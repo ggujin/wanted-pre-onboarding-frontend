@@ -1,0 +1,23 @@
+.wrapper {
+  background-color: #efefef;
+  display: flex; // 가운데로
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.form {
+  width: 400px;
+  border-radius: 5px; // 깎고 3pxdmf
+  height: 280px;
+  background-color: white;
+  box-shadow: 1px 1px 1px #ccc;
+}
+
+.formHeader {
+  text-align: center;
+}
+
+.icon {
+  vertical-align: top;
+}
