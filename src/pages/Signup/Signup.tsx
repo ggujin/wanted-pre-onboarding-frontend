@@ -6,8 +6,10 @@ import { Input } from "~/components/Input";
 import { useInput } from "~/Hooks/useInput";
 import { httpClient } from "~/libs/httpClient";
 import { CenterFormLayout } from "~/layouts/CenterFormLayout";
+import { ErrorResponse } from "~/types/api";
 
 import styles from "./Signup.module.scss";
+import { isAxiosError } from "axios";
 
 export function Signup() {
   const navigate = useNavigate();
@@ -38,7 +40,11 @@ export function Signup() {
         alert("가입 완료");
         navigate("/signin");
       }
-    } catch (err) {}
+    } catch (err) {
+      if (isAxiosError(err) && err.response?.data) {
+        alert((err.response.data as ErrorResponse).message);
+      }
+    }
   };
 
   return (
