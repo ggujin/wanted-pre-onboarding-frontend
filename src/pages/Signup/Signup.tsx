@@ -1,10 +1,10 @@
 import { FormEvent } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router";
 import { FcTodoList } from "react-icons/fc";
 
 import { Input } from "../../components/Input";
 import { useInput } from "../../Hooks/useInput";
+import { httpClient } from "../../libs/httpClient";
 
 import styles from "./Signup.module.scss";
 
@@ -28,7 +28,7 @@ export function Signup() {
     if (isSubmitDisabled) return;
     e.preventDefault();
     try {
-      const response = await axios.post("/auth/signup", {
+      const response = await httpClient.post("/auth/signup", {
         email,
         password,
       });
