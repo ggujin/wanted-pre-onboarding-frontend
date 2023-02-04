@@ -1,4 +1,6 @@
-import { useState, ChangeEvent, useEffect } from "react";
+import { FormEvent } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router";
 import { FcTodoList } from "react-icons/fc";
 
 import { Input } from "../../components/Input";
@@ -7,6 +9,7 @@ import { useInput } from "../../Hooks/useInput";
 import styles from "./Signup.module.scss";
 
 export function Signup() {
+  const navigate = useNavigate();
   const {
     value: email,
     onChange: handleEmailChange,
@@ -17,13 +20,29 @@ export function Signup() {
     value: password,
     onChange: handlePasswordChange,
     isValid: isPasswordValid,
-  } = useInput({ validate: (password) => password.length > 8 });
+  } = useInput({ validate: (password) => password.length >= 8 });
 
   const isSubmitDisabled = !(isEmailValid && isPasswordValid);
 
+  const handleSubmit = async (e: FormEvent) => {
+    if (isSubmitDisabled) return;
+    e.preventDefault();
+    try {
+      const response = await axios.post("/auth/signup", {
+        email,
+        password,
+      });
+
+      if (response.status === 201) {
+        alert("가입 완료");
+        navigate("/signin");
+      }
+    } catch (err) {}
+  };
+
   return (
     <div className={styles.wrapper}>
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <h2 className={styles.formHeader}>
           <FcTodoList className={styles.icon} />
           회원가입
