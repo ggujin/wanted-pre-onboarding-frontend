@@ -1,6 +1,6 @@
 .formHeader {
   text-align: center;
-  margin: 0;
+  margin-top: 0;
 }
 
 .icon {
@@ -18,4 +18,8 @@
   &:disabled {
     background-color: lighten(#2f3c7e, 30%);
   }
+}
+
+.formItem + .formItem {
+  margin-top: 10px;
 }

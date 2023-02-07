@@ -27,7 +27,7 @@ export function Signin() {
           <IoLogInOutline className={styles.icon} />
           로그인
         </h2>
-        <div>
+        <div className={styles.formItem}>
           <Input
             type="text"
             name="email"
@@ -37,7 +37,7 @@ export function Signin() {
             data-testid="email-input"
           />
         </div>
-        <div>
+        <div className={styles.formItem}>
           <Input
             type="password"
             name="password"
@@ -47,7 +47,7 @@ export function Signin() {
             data-testid="password-input"
           />
         </div>
-        <div>
+        <div className={styles.formItem}>
           <button
             className={styles.submit}
             type="submit"
