@@ -1,12 +1,18 @@
+import { FormEvent } from "react";
+import { useNavigate } from "react-router";
 import { IoLogInOutline } from "react-icons/io5";
 
+import { ErrorResponse } from "~/types/api";
+import { httpClient } from "~/libs/httpClient";
 import { CenterFormLayout } from "~/layouts/CenterFormLayout";
 import { Input } from "~/components/Input";
 import { useInput } from "~/Hooks/useInput";
 
 import styles from "./Signin.module.scss";
+import { isAxiosError } from "axios";
 
 export function Signin() {
+  const navigate = useNavigate();
   const {
     value: email,
     onChange: handleEmailChange,
@@ -20,9 +26,32 @@ export function Signin() {
   } = useInput({ validate: (password) => password.length >= 8 });
 
   const isSubmitDisabled = !(isEmailValid && isPasswordValid);
+
+  const handleSubmit = async (e: FormEvent) => {
+    if (isSubmitDisabled) return;
+    e.preventDefault();
+    try {
+      const response = await httpClient.post("/auth/signin", {
+        email,
+        password,
+      });
+
+      if (response.status === 200) {
+        const token = response.data.access_token;
+        localStorage.setItem("access_token", token);
+        alert("로그인 성공");
+        navigate("/todo");
+      }
+    } catch (err) {
+      if (isAxiosError(err) && err.response?.data) {
+        alert((err.response.data as ErrorResponse).message);
+      }
+    }
+  };
+
   return (
     <CenterFormLayout>
-      <form>
+      <form onSubmit={handleSubmit}>
         <h2 className={styles.formHeader}>
           <IoLogInOutline className={styles.icon} />
           로그인
