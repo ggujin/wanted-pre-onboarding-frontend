@@ -1,5 +1,5 @@
 import { FormEvent } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, Navigate } from "react-router";
 import { FcTodoList } from "react-icons/fc";
 
 import { Input } from "~/components/Input";
@@ -13,6 +13,7 @@ import { isAxiosError } from "axios";
 
 export function Signup() {
   const navigate = useNavigate();
+
   const {
     value: email,
     onChange: handleEmailChange,
@@ -24,6 +25,10 @@ export function Signup() {
     onChange: handlePasswordChange,
     isValid: isPasswordValid,
   } = useInput({ validate: (password) => password.length >= 8 });
+
+  if (localStorage.getItem("access_token")?.length) {
+    return <Navigate to="/todo" replace={true} />;
+  }
 
   const isSubmitDisabled = !(isEmailValid && isPasswordValid);
 
