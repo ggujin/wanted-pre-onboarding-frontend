@@ -1,5 +1,5 @@
 import { FormEvent } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, Navigate } from "react-router";
 import { IoLogInOutline } from "react-icons/io5";
 
 import { ErrorResponse } from "~/types/api";
@@ -13,6 +13,7 @@ import { isAxiosError } from "axios";
 
 export function Signin() {
   const navigate = useNavigate();
+
   const {
     value: email,
     onChange: handleEmailChange,
@@ -27,6 +28,9 @@ export function Signin() {
 
   const isSubmitDisabled = !(isEmailValid && isPasswordValid);
 
+  if (localStorage.getItem("access_token")?.length) {
+    return <Navigate to="/todo" replace={true} />;
+  }
   const handleSubmit = async (e: FormEvent) => {
     if (isSubmitDisabled) return;
     e.preventDefault();
