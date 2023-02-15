@@ -6,7 +6,7 @@ import { ErrorResponse } from "~/types/api";
 import { httpClient } from "~/libs/httpClient";
 import { CenterFormLayout } from "~/layouts/CenterFormLayout";
 import { Input } from "~/components/Input";
-import { useInput } from "~/Hooks/useInput";
+import { useInput } from "~/hooks/useInput";
 
 import styles from "./Signin.module.scss";
 import { isAxiosError } from "axios";
@@ -42,7 +42,7 @@ export function Signin() {
 
       if (response.status === 200) {
         const token = response.data.access_token;
-        localStorage.setItem("access_token", token);
+        localStorage.setItem("accessToken", token);
         alert("로그인 성공");
         navigate("/todo");
       }

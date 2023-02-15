@@ -3,7 +3,7 @@ import { useNavigate, Navigate } from "react-router";
 import { FcTodoList } from "react-icons/fc";
 
 import { Input } from "~/components/Input";
-import { useInput } from "~/Hooks/useInput";
+import { useInput } from "~/hooks/useInput";
 import { httpClient } from "~/libs/httpClient";
 import { CenterFormLayout } from "~/layouts/CenterFormLayout";
 import { ErrorResponse } from "~/types/api";
