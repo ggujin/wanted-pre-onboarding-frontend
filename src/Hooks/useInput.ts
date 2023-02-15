@@ -5,11 +5,11 @@ interface UseInputParams {
 }
 
 export function useInput({ validate }: UseInputParams) {
-  const [value, setVlaue] = useState<string>("");
+  const [value, setValue] = useState<string>("");
   const [isValid, setIsValid] = useState<boolean>(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
-    setVlaue(e.target.value);
+    setValue(e.target.value);
 
   useEffect(() => {
     if (!validate) return;
