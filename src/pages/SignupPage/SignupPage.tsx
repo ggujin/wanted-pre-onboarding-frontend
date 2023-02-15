@@ -1,17 +1,17 @@
 import { FormEvent } from "react";
 import { useNavigate, Navigate } from "react-router";
-import { IoLogInOutline } from "react-icons/io5";
+import { FcTodoList } from "react-icons/fc";
 
-import { ErrorResponse } from "~/types/api";
-import { httpClient } from "~/libs/httpClient";
-import { CenterFormLayout } from "~/layouts/CenterFormLayout";
 import { Input } from "~/components/Input";
 import { useInput } from "~/hooks/useInput";
+import { httpClient } from "~/libs/httpClient";
+import { CenterFormLayout } from "~/layouts/CenterFormLayout";
+import { ErrorResponse } from "~/types/api";
 
-import styles from "./Signin.module.scss";
+import styles from "./Signup.module.scss";
 import { isAxiosError } from "axios";
 
-export function Signin() {
+export function SignupPage() {
   const navigate = useNavigate();
 
   const {
@@ -26,22 +26,24 @@ export function Signin() {
     isValid: isPasswordValid,
   } = useInput({ validate: (password) => password.length >= 8 });
 
+  if (localStorage.getItem("access_token")?.length) {
+    return <Navigate to="/todo" replace={true} />;
+  }
+
   const isSubmitDisabled = !(isEmailValid && isPasswordValid);
 
   const handleSubmit = async (e: FormEvent) => {
     if (isSubmitDisabled) return;
     e.preventDefault();
     try {
-      const response = await httpClient.post("/auth/signin", {
+      const response = await httpClient.post("/auth/signup", {
         email,
         password,
       });
 
-      if (response.status === 200) {
-        const token = response.data.access_token;
-        localStorage.setItem("accessToken", token);
-        alert("로그인 성공");
-        navigate("/todo");
+      if (response.status === 201) {
+        alert("가입 완료");
+        navigate("/signin");
       }
     } catch (err) {
       if (isAxiosError(err) && err.response?.data) {
@@ -54,16 +56,16 @@ export function Signin() {
     <CenterFormLayout>
       <form onSubmit={handleSubmit}>
         <h2 className={styles.formHeader}>
-          <IoLogInOutline className={styles.icon} />
-          로그인
+          <FcTodoList className={styles.icon} />
+          회원가입
         </h2>
         <div className={styles.formItem}>
           <Input
             type="text"
             name="email"
             value={email}
-            placeholder="이메일을 입력해주세요"
             onChange={handleEmailChange}
+            placeholder="이메일을 입력해주세요"
             data-testid="email-input"
           />
         </div>
@@ -72,8 +74,8 @@ export function Signin() {
             type="password"
             name="password"
             value={password}
-            placeholder="비밀번호를 입력해주세요"
             onChange={handlePasswordChange}
+            placeholder="비밀번호를 입력해주세요"
             data-testid="password-input"
           />
         </div>
@@ -81,10 +83,10 @@ export function Signin() {
           <button
             className={styles.submit}
             type="submit"
+            data-testid="signup-button"
             disabled={isSubmitDisabled}
-            data-testid="signin-button"
           >
-            로그인
+            가입하기
           </button>
         </div>
       </form>
