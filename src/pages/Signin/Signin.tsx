@@ -28,9 +28,6 @@ export function Signin() {
 
   const isSubmitDisabled = !(isEmailValid && isPasswordValid);
 
-  if (localStorage.getItem("access_token")?.length) {
-    return <Navigate to="/todo" replace={true} />;
-  }
   const handleSubmit = async (e: FormEvent) => {
     if (isSubmitDisabled) return;
     e.preventDefault();
