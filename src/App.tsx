@@ -1,14 +1,17 @@
 import { Routes, Route } from "react-router-dom";
+import { AuthRoute } from "./components/AuthRoute";
+import { PrivateRoute } from "./components/PrivateRoute";
 
-import { Signup, Signin } from "./pages";
+import { Signup, Signin, TodoPage } from "./pages";
 import "./styles/global.scss";
 
 function App() {
   return (
     <Routes>
       {/* 칠드론이 업서서 바로닫아 /  */}
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/signin" element={<Signin />} />
+      <AuthRoute path="/signup" element={<Signup />} />
+      <AuthRoute path="/signin" element={<Signin />} />
+      <PrivateRoute path="/todo" element={<TodoPage />} />
     </Routes>
   );
 }
